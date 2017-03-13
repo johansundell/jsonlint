@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 )
 
@@ -17,20 +18,26 @@ func main() {
 	if filename != "" {
 		var err error
 		if b, err = ioutil.ReadFile(filename); err != nil {
-			fmt.Println("Could not open file", filename, "error ", err)
+			log.Fatal("Could not open file", filename, "error ", err)
 		}
 	} else {
-		if b, err = ioutil.ReadAll(os.Stdin); err != nil {
-			fmt.Println("Could not read input", err)
+		info, _ := os.Stdin.Stat()
+		if (info.Mode() & os.ModeCharDevice) == 0 {
+			fmt.Println("Pipe data", info.Size())
+			if b, err = ioutil.ReadAll(os.Stdin); err != nil {
+				log.Fatal("Could not read input", err)
+			}
+		} else {
+			log.Fatal("No input")
 		}
 	}
 	var input map[string]interface{}
 	if err := json.Unmarshal(b, &input); err != nil {
-		fmt.Println("Not valid json", err)
+		log.Fatal("Not valid json", err)
 	}
 	result, err := json.MarshalIndent(input, "", "\t")
 	if err != nil {
-		fmt.Println("Could not export", err)
+		log.Fatal("Could not export", err)
 	}
 	fmt.Println(string(result))
 }
