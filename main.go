@@ -23,7 +23,6 @@ func main() {
 	} else {
 		info, _ := os.Stdin.Stat()
 		if (info.Mode() & os.ModeCharDevice) == 0 {
-			fmt.Println("Pipe data", info.Size())
 			if b, err = ioutil.ReadAll(os.Stdin); err != nil {
 				log.Fatal("Could not read input", err)
 			}
