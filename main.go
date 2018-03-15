@@ -30,7 +30,7 @@ func main() {
 			log.Fatal("No input")
 		}
 	}
-	var input map[string]interface{}
+	var input interface{}
 	if err := json.Unmarshal(b, &input); err != nil {
 		log.Fatal("Not valid json", err)
 	}
