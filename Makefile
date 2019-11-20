@@ -3,7 +3,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 GHACCOUNT := johansundell
-NAME := github-release
+NAME := jsonlint
 VERSION := v1.0.0
 
 build:
@@ -13,9 +13,8 @@ compile:
 	@rm -rf build/
 	@gox -ldflags "-X main.Version=$(VERSION)" \
 	-osarch="darwin/amd64" \
-	-os="linux" \
+	-os="linux/adm64" \
 	-os="windows" \
-	-os="solaris" \
 	-output "build/{{.Dir}}_$(VERSION)_{{.OS}}_{{.Arch}}/$(NAME)" \
 	./...
 
