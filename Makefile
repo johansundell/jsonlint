@@ -4,7 +4,7 @@
 
 GHACCOUNT := johansundell
 NAME := jsonlint
-VERSION := v1.0.1
+VERSION := v1.0.2
 
 build:
 	go build -ldflags "-X main.Version=$(VERSION)"
@@ -13,7 +13,7 @@ compile:
 	@rm -rf build/
 	@gox -ldflags "-X main.Version=$(VERSION)" \
 	-osarch="darwin/amd64" \
-	-os="linux/adm64" \
+	-os="linux/amd64" \
 	-os="windows" \
 	-output "build/{{.Dir}}_$(VERSION)_{{.OS}}_{{.Arch}}/$(NAME)" \
 	./...
