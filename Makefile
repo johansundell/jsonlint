@@ -4,7 +4,7 @@
 
 GHACCOUNT := johansundell
 NAME := jsonlint
-VERSION := v1.0.3
+VERSION := v1.0.4
 
 build:
 	go build -ldflags "-X main.Version=$(VERSION)"

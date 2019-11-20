@@ -9,10 +9,17 @@ import (
 	"os"
 )
 
+var Version = "development"
+
 func main() {
 	var filename string
 	flag.StringVar(&filename, "file", "", "The input file")
+	var showVersion bool
+	flag.BoolVar(&showVersion, "version", false, "Display current version")
 	flag.Parse()
+	if showVersion {
+		fmt.Println("Version: ", Version)
+	}
 	var b []byte
 	var err error
 	if filename != "" {
